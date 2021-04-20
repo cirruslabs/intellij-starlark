@@ -1,0 +1,25 @@
+<idea-plugin>
+  <id>com.intellij.plugins.starlark</id>
+  <name>Starlark Support</name>
+  <change-notes>
+    <![CDATA[
+    ]]>
+  </change-notes>
+  <vendor>@fedor</vendor>
+
+  <idea-version since-build="203.*"/><!-- Will be patched by the plugin -->
+
+  <resource-bundle>StarlarkBundle</resource-bundle>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.lang</depends>
+  <depends>com.intellij.modules.python-core-capable</depends>
+  <depends>PythonCore</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileType name="Starlark" extensions="star" language="Starlark"
+              implementationClass="org.cirruslabs.intellij.starlark.StarlarkFileType" fieldName="INSTANCE"/>
+    <lang.parserDefinition language="Starlark"
+                           implementationClass="org.cirruslabs.intellij.starlark.StarlarkParserDefinition"/>
+  </extensions>
+</idea-plugin>
