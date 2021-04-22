@@ -19,4 +19,8 @@ class StarlarkResolveTest : LightJavaCodeInsightFixtureTestCase() {
   fun testBuiltin() {
     assertReferenceResolves("builtin.star")
   }
+
+  fun testLoadCirrusJson() {
+    assertReferenceResolves("load_cirrus_json.star")
+  }
 }

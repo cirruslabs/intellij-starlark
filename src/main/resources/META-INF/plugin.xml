@@ -33,9 +33,15 @@
     <!--  load  -->
     <completion.contributor language="Python"
                             implementationClass="org.cirruslabs.intellij.starlark.modules.LoadedSymbolCompletionContributor"/>
+
+    <!--  cirrus module  -->
+    <indexedRootsProvider implementation="org.cirruslabs.intellij.starlark.modules.CirrusModuleSetContributor"/>
   </extensions>
 
   <extensions defaultExtensionNs="Pythonid">
+    <!--  builtins  -->
     <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.builtins.BuiltinReferenceResolveProvider"/>
+    <!--  load  -->
+    <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.modules.LoadedReferenceResolveProvider"/>
   </extensions>
 </idea-plugin>

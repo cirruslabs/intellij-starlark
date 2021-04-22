@@ -20,6 +20,14 @@ class StarlarkCompletionTest : LightJavaCodeInsightFixtureTestCase() {
     assertExpectedLookups("builtin.star", "print", "load")
   }
 
+  fun testLoadCirrusEnv() {
+    assertExpectedLookups("load_cirrus_env.star", "get")
+  }
+
+  fun testLoadCirrusFS() {
+    assertExpectedLookups("load_cirrus_fs.star", "exists")
+  }
+
   fun testLoadCirrusJson() {
     assertExpectedLookups("load_cirrus_json.star", "json", "json_alias")
   }
