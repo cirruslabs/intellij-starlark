@@ -25,9 +25,14 @@
     <lang.parserDefinition language="Starlark"
                            implementationClass="org.cirruslabs.intellij.starlark.StarlarkParserDefinition"/>
 
+    <!--  builtins  -->
     <indexedRootsProvider implementation="org.cirruslabs.intellij.starlark.builtins.BuitlinSetContributor"/>
     <completion.contributor language="Python"
                             implementationClass="org.cirruslabs.intellij.starlark.builtins.BuiltinCompletionContributor"/>
+
+    <!--  load  -->
+    <completion.contributor language="Python"
+                            implementationClass="org.cirruslabs.intellij.starlark.modules.LoadedSymbolCompletionContributor"/>
   </extensions>
 
   <extensions defaultExtensionNs="Pythonid">

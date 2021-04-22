@@ -9,10 +9,18 @@ class StarlarkCompletionTest : LightJavaCodeInsightFixtureTestCase() {
     return "src/test/testData/completion"
   }
 
-  fun testCompletion() {
-    myFixture.configureByFiles("builtin.star")
+  private fun assertExpectedLookups(filePath: String, vararg expected: String) {
+    myFixture.configureByFiles(filePath)
     myFixture.complete(CompletionType.BASIC, 1)
     val lookupElement = myFixture.lookupElementStrings ?: emptyList()
-    assertContainsElements(lookupElement, "print", "load")
+    assertContainsElements(lookupElement, *expected)
+  }
+
+  fun testBuiltin() {
+    assertExpectedLookups("builtin.star", "print", "load")
+  }
+
+  fun testLoadCirrusJson() {
+    assertExpectedLookups("load_cirrus_json.star", "json", "json_alias")
   }
 }
