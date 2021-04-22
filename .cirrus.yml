@@ -10,4 +10,6 @@ task:
   name: Publish
   only_if: $CIRRUS_TAG != ''
   depends_on: Tests
+  env:
+    JETBRAINS_TOKEN: ENCRYPTED[c84d3d38e258a17fcb5fbe4ecdfa0282ffea94af77ba489fd1d69a3a2664b7cb44a0e1ec2ae94c79febb60a87bf3bd6c]
   test_script: ./gradlew publishPlugin
