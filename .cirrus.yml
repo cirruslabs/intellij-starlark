@@ -1,0 +1,13 @@
+container:
+  image: openjdk:11
+
+task:
+  name: Tests
+  build_script: ./gradlew classes testClasses
+  test_script: ./gradlew test
+
+task:
+  name: Publish
+  only_if: $CIRRUS_TAG != ''
+  depends_on: Tests
+  test_script: ./gradlew publishPlugin

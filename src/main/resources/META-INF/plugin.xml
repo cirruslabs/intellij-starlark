@@ -16,10 +16,21 @@
   <depends>com.intellij.modules.python-core-capable</depends>
   <depends>PythonCore</depends>
 
+  <!-- Seems Python plugin uses some JavaPsi classes -->
+  <depends>com.intellij.modules.java-capable</depends>
+
   <extensions defaultExtensionNs="com.intellij">
     <fileType name="Starlark" extensions="star" language="Starlark"
               implementationClass="org.cirruslabs.intellij.starlark.StarlarkFileType" fieldName="INSTANCE"/>
     <lang.parserDefinition language="Starlark"
                            implementationClass="org.cirruslabs.intellij.starlark.StarlarkParserDefinition"/>
+
+    <indexedRootsProvider implementation="org.cirruslabs.intellij.starlark.builtins.BuitlinSetContributor"/>
+    <completion.contributor language="Python"
+                            implementationClass="org.cirruslabs.intellij.starlark.builtins.BuiltinCompletionContributor"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="Pythonid">
+    <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.builtins.BuiltinReferenceResolveProvider"/>
   </extensions>
 </idea-plugin>
