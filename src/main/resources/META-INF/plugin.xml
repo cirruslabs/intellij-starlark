@@ -43,5 +43,6 @@
     <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.builtins.BuiltinReferenceResolveProvider"/>
     <!--  load  -->
     <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.modules.LoadedReferenceResolveProvider"/>
+    <inspectionExtension implementation="org.cirruslabs.intellij.starlark.inspections.StarlarkPyInspectionExtension"/>
   </extensions>
 </idea-plugin>
