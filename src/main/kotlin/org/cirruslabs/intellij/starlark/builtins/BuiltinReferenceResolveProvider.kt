@@ -14,13 +14,18 @@ class BuiltinReferenceResolveProvider: PyReferenceResolveProvider {
       return emptyList()
     }
     val builtinsFile = PsiManager.getInstance(expression.project).findFile(
-      BuitlinSetContributor.STARLARK_BUILTINS ?: return emptyList()
+      BuitlinSetContributor.STARLARK_BUILTINS
+    ) as? PyFile ?: return emptyList()
+    val builtinTypesFile = PsiManager.getInstance(expression.project).findFile(
+      BuitlinSetContributor.PYTHON_BUILTINS
     ) as? PyFile ?: return emptyList()
     return listOfNotNull(
       builtinsFile.findExportedName(expression.name)?.let {
         RatedResolveResult(RatedResolveResult.RATE_NORMAL, it)
+      },
+        builtinTypesFile.findExportedName(expression.name)?.let {
+        RatedResolveResult(RatedResolveResult.RATE_NORMAL, it)
       }
     )
-
   }
 }

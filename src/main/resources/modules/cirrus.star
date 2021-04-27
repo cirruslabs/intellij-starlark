@@ -1,45 +1,63 @@
 # stub for Cirrus builtin https://github.com/cirruslabs/cirrus-cli/blob/master/STARLARK.md#builtins
 
+
 class FileSystem:
     def __init__(self):
         pass
 
     def exists(self, path):
-        # type: (str) -> bool
+        """
+        :type path: str
+        :rtype bool
+        """
         pass
 
     def read(self, path):
-        # type: (str) -> Optional[str]
+        """
+        :type path: str
+        :rtype str, NoneType
+        """
         pass
 
     def readdir(self, path):
-        # type: (str) -> List[str]
+        """
+        :type path: str
+        :rtype list[str]
+        """
         pass
 
 
 fs = FileSystem()
 
-env = {}  # type: Mapping[str, str]
+env: dict = {}
 
 
-def changes_include(*patterns):
-    # type (list[str]) -> bool
+def changes_include(*args):
+    """
+    :rtype bool
+    """
     pass
 
 
 class HttpResponse:
+    url: str
+    status_code: int
+    headers: object
+    encoding: str
+
     def __init__(self):
-        self.url = ""  # type: str
-        self.status_code = 0  # type: int
-        self.headers = {}  # type: object
-        self.encoding = ""  # type: str
+        pass
 
     def body(self):
-        # type: () -> str
+        """
+        :rtype: str
+        """
         pass
 
     def json(self):
-        # type: () -> object
+        """
+        :rtype: object
+        """
         pass
 
 
@@ -48,27 +66,78 @@ class HttpClient:
         pass
 
     def delete(self, url, params={}, headers={}, body="", form_body={}, json_body={}, auth=()):
-        # type: (str, object, object, str, object, object, tuple) -> HttpResponse
+        """
+        :type url: str
+        :type params: object
+        :type headers: object
+        :type body: str
+        :type form_body: object
+        :type json_body: object
+        :type auth: tuple
+        :rtype HttpResponse
+        """
         pass
 
     def get(self, url, params={}, headers={}, auth=()):
-        # type: (str, object, object, tuple) -> HttpResponse
+        """
+        :type url: str
+        :type params: object
+        :type headers: object
+        :type auth: tuple
+        :rtype HttpResponse
+        """
         pass
 
     def options(self, url, params={}, headers={}, body="", form_body={}, json_body={}, auth=()):
-        # type: (str, object, object, str, object, object, tuple) -> HttpResponse
+        """
+        :type url: str
+        :type params: object
+        :type headers: object
+        :type body: str
+        :type form_body: object
+        :type json_body: object
+        :type auth: tuple
+        :rtype HttpResponse
+        """
         pass
 
     def patch(self, url, params={}, headers={}, body="", form_body={}, json_body={}, auth=()):
-        # type: (str, object, object, str, object, object, tuple) -> HttpResponse
+        """
+        :type url: str
+        :type params: object
+        :type headers: object
+        :type body: str
+        :type form_body: object
+        :type json_body: object
+        :type auth: tuple
+        :rtype HttpResponse
+        """
         pass
 
     def post(self, url, params={}, headers={}, body="", form_body={}, json_body={}, auth=()):
-        # type: (str, object, object, str, object, object, tuple) -> HttpResponse
+        """
+        :type url: str
+        :type params: object
+        :type headers: object
+        :type body: str
+        :type form_body: object
+        :type json_body: object
+        :type auth: tuple
+        :rtype HttpResponse
+        """
         pass
 
     def put(self, url, params={}, headers={}, body="", form_body={}, json_body={}, auth=()):
-        # type: (str, object, object, str, object, object, tuple) -> HttpResponse
+        """
+        :type url: str
+        :type params: object
+        :type headers: object
+        :type body: str
+        :type form_body: object
+        :type json_body: object
+        :type auth: tuple
+        :rtype HttpResponse
+        """
         pass
 
 
@@ -80,15 +149,24 @@ class Hash:
         pass
 
     def md5(self, text):
-        # type: (str) -> str
+        """
+        :type text: str
+        :rtype str
+        """
         pass
 
     def sha1(self, text):
-        # type: (str) -> str
+        """
+        :type text: str
+        :rtype str
+        """
         pass
 
     def sha256(self, text):
-        # type: (str) -> str
+        """
+        :type text: str
+        :rtype str
+        """
         pass
 
 
@@ -100,11 +178,19 @@ class Base64:
         pass
 
     def decode(self, src, encoding="standard"):
-        # type: (str, str) -> str
+        """
+        :type src: str
+        :type encoding: str
+        :rtype str
+        """
         pass
 
     def encode(self, src, encoding="standard"):
-        # type: (str, str) -> str
+        """
+        :type src: str
+        :type encoding: str
+        :rtype str
+        """
         pass
 
 
@@ -116,11 +202,17 @@ class Json:
         pass
 
     def dumps(self, obj):
-        # type: (object) -> str
+        """
+        :type obj: object
+        :rtype str
+        """
         pass
 
     def loads(self, text):
-        # type: (str) -> object
+        """
+        :type text: str
+        :rtype object
+        """
         pass
 
 
@@ -132,11 +224,17 @@ class Yaml:
         pass
 
     def dumps(self, obj):
-        # type: (object) -> str
+        """
+        :type obj: object
+        :rtype str
+        """
         pass
 
     def loads(self, text):
-        # type: (str) -> object
+        """
+        :type text: str
+        :rtype object
+        """
         pass
 
 
@@ -148,15 +246,33 @@ class RegEx:
         pass
 
     def findall(self, pattern, text, flags=0):
-        # type: (str, str, int) -> str
+        """
+        :type pattern: str
+        :type text: str
+        :type flags: int
+        :rtype str
+        """
         pass
 
     def split(self, pattern, text, maxsplit=0, flags=0):
-        # type: (str, str, int, int) -> List[str]
+        """
+        :type pattern: str
+        :type text: str
+        :type maxsplit: int
+        :type flags: int
+        :rtype list[str]
+        """
         pass
 
     def sub(self, pattern, repl, text, count=0, flags=0):
-        # type: (str, str, str, int, int) -> str
+        """
+        :type pattern: str
+        :type text: str
+        :type repl: str
+        :type count: int
+        :type flags: int
+        :rtype str
+        """
         pass
 
 
@@ -168,7 +284,9 @@ class ZipInfo:
         pass
 
     def read(self):
-        # type: () -> str
+        """
+        :rtype: str
+        """
         pass
 
 
@@ -177,11 +295,16 @@ class ZipFile:
         pass
 
     def namelist(self):
-        # type: () -> List[string]
+        """
+        :rtype: list[str]
+        """
         pass
 
     def open(self, filename):
-        # type: (str) -> ZipInfo
+        """
+        :param filename: str
+        :rtype: ZipInfo
+        """
         pass
 
 
@@ -190,7 +313,9 @@ class ZipFileFactory:
         pass
 
     def ZipFile(self, data):
-        # type: (any) -> ZipFile
+        """
+        :rtype: ZipInfo
+        """
         pass
 
 

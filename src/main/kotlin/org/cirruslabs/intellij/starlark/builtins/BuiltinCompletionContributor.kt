@@ -5,7 +5,6 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiManager
 import com.intellij.util.ProcessingContext
-import com.jetbrains.python.PythonLanguage
 import com.jetbrains.python.codeInsight.completion.PyKeywordCompletionContributor
 import com.jetbrains.python.psi.PyFile
 import org.cirruslabs.intellij.starlark.StarlarkLanguage
@@ -21,14 +20,17 @@ class BuiltinCompletionContributor : CompletionContributor() {
           if (element.containingFile.language !is StarlarkLanguage) {
             return
           }
-          val builtinsFile = PsiManager.getInstance(element.project).findFile(
-            BuitlinSetContributor.STARLARK_BUILTINS ?: return
-          ) as? PyFile ?: return
-          builtinsFile.topLevelClasses.forEach {
-            result.addElement(LookupElementBuilder.create(it))
-          }
-          builtinsFile.topLevelFunctions.forEach {
-            result.addElement(LookupElementBuilder.create(it))
+          val psiManager = PsiManager.getInstance(element.project)
+          listOfNotNull(
+            psiManager.findFile(BuitlinSetContributor.PYTHON_BUILTINS) as? PyFile,
+            psiManager.findFile(BuitlinSetContributor.STARLARK_BUILTINS) as? PyFile,
+          ).forEach { file ->
+            file.topLevelClasses.forEach {
+              result.addElement(LookupElementBuilder.create(it))
+            }
+            file.topLevelFunctions.forEach {
+              result.addElement(LookupElementBuilder.create(it))
+            }
           }
         }
       })
