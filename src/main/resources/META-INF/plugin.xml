@@ -44,5 +44,7 @@
     <!--  load  -->
     <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.modules.LoadedReferenceResolveProvider"/>
     <inspectionExtension implementation="org.cirruslabs.intellij.starlark.inspections.StarlarkPyInspectionExtension"/>
+    <!--  hooks  -->
+    <typeProvider implementation="org.cirruslabs.intellij.starlark.hooks.CirrusHooksTypeProvider"/>
   </extensions>
 </idea-plugin>

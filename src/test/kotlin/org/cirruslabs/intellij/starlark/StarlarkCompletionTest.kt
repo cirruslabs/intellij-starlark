@@ -27,4 +27,8 @@ class StarlarkCompletionTest : LightJavaCodeInsightFixtureTestCase() {
     fun testLoadCirrusJson() {
         assertExpectedLookups("load_cirrus_json.star", "json", "json_alias")
     }
+
+    fun testOnBuildFailedHookPayload() {
+        assertExpectedLookups("on_build_failed_hook_payload.star", "repository", "build", "task")
+    }
 }

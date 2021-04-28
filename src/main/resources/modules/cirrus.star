@@ -1,4 +1,4 @@
-# stub for Cirrus builtin https://github.com/cirruslabs/cirrus-cli/blob/master/STARLARK.md#builtins
+# stub for Cirrus builtins https://github.com/cirruslabs/cirrus-cli/blob/master/STARLARK.md#builtins
 
 
 class FileSystem:
@@ -320,3 +320,65 @@ class ZipFileFactory:
 
 
 zipfile = ZipFileFactory()
+
+
+# Types for Cirrus CI hooks
+
+class CirrusHookRepositoryPayload:
+    id: int
+    owner: str
+    name: str
+    isPrivate: bool
+
+    def __init__(self):
+        pass
+
+
+class CirrusHookBuildPayload:
+    id: int
+    branch: str
+    pullRequest: int
+    changeIdInRepo: str
+    changeTimestamp: int
+    status: str
+
+    def __init__(self):
+        pass
+
+
+class CirrusHookTaskPayload:
+    id: int
+    name: str
+    status: str
+    statusTimestamp: int
+    creationTimestamp: int
+    uniqueLabels: list[str]
+    automaticReRun: bool
+    automaticallyReRunnable: bool
+
+    def __init__(self):
+        pass
+
+
+class CirrusHookPayloadData:
+    repository: CirrusHookRepositoryPayload
+    build: CirrusHookBuildPayload
+    task: CirrusHookTaskPayload
+
+    def __init__(self):
+        pass
+
+
+class CirrusHookPayload:
+    action: str
+    data: CirrusHookPayloadData
+
+    def __init__(self):
+        pass
+
+
+class CirrusHookContext:
+    payload: CirrusHookPayload
+
+    def __init__(self):
+        pass
