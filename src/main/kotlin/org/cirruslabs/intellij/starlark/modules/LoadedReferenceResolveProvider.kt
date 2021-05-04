@@ -1,7 +1,6 @@
 package org.cirruslabs.intellij.starlark.modules
 
 import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiManager
 import com.jetbrains.python.psi.*
 import com.jetbrains.python.psi.resolve.PyReferenceResolveProvider
 import com.jetbrains.python.psi.resolve.RatedResolveResult
@@ -15,22 +14,13 @@ class LoadedReferenceResolveProvider : PyReferenceResolveProvider {
     }
     val (module, id) = findModuleAndActualIdentifier(expression.containingFile, expression.name ?: return emptyList())
       ?: return emptyList()
-    val moduleFile = resolveModuleFile(expression.containingFile, module)
+    val moduleFile = CirrusModuleManager.resolveModuleFile(expression.containingFile, module)
       ?: return emptyList()
     return listOfNotNull(
       moduleFile.findExportedName(id)?.let {
         RatedResolveResult(RatedResolveResult.RATE_NORMAL, it)
       }
     )
-  }
-
-  private fun resolveModuleFile(originalFile: PsiFile, module: String): PyFile? {
-    if (module == "cirrus") {
-      return PsiManager.getInstance(originalFile.project).findFile(
-        CirrusModuleSetContributor.CIRRUS_MODULE ?: return null
-      ) as? PyFile
-    }
-    return null
   }
 
   private fun findModuleAndActualIdentifier(file: PsiFile, name: String): Pair<String, String>? {
