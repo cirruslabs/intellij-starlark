@@ -1,10 +1,7 @@
 <idea-plugin>
   <id>org.cirruslabs.intellij.plugins.starlark</id>
   <name>Cirrus Starlark Support</name>
-  <change-notes>
-    <![CDATA[
-    ]]>
-  </change-notes>
+  <description>Code assistance for Cirrus specific Starlark configuration scripts and hooks</description>
   <vendor>@fedor</vendor>
 
   <idea-version since-build="203.*"/><!-- Will be patched by the plugin -->

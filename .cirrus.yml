@@ -5,6 +5,7 @@ task:
   name: Tests
   build_script: ./gradlew classes testClasses
   test_script: ./gradlew test
+  verify_script: ./gradlew verifyPlugin
 
 task:
   name: Publish
