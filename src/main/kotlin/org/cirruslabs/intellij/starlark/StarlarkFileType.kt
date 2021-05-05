@@ -1,5 +1,6 @@
 package org.cirruslabs.intellij.starlark
 
+import com.intellij.icons.AllIcons
 import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.Icon
 
@@ -16,5 +17,5 @@ class StarlarkFileType private constructor() : LanguageFileType(StarlarkLanguage
 
   override fun getDefaultExtension(): String = "star"
 
-  override fun getIcon(): Icon? = null
+  override fun getIcon(): Icon = AllIcons.Ide.Rating
 }
