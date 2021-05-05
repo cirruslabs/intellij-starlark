@@ -37,6 +37,7 @@
     <!--  cirrus module  -->
     <indexedRootsProvider implementation="org.cirruslabs.intellij.starlark.modules.CirrusModuleManager"/>
     <psi.referenceContributor implementation="org.cirruslabs.intellij.starlark.modules.ModuleReferenceContributor"/>
+    <cachesInvalidator implementation="org.cirruslabs.intellij.starlark.modules.CirrusModulesCacheInvalidator"/>
   </extensions>
 
   <extensions defaultExtensionNs="Pythonid">

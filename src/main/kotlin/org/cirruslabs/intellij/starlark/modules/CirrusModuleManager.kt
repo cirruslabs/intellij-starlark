@@ -10,7 +10,6 @@ import com.intellij.util.indexing.IndexableSetContributor
 import com.jetbrains.python.psi.PyFile
 import java.nio.file.Path
 import java.nio.file.Paths
-import kotlin.io.path.Path
 
 class CirrusModuleManager : IndexableSetContributor() {
     companion object {
@@ -23,7 +22,7 @@ class CirrusModuleManager : IndexableSetContributor() {
             if (module == "cirrus") return CIRRUS_MODULE
             return try {
                 val locator = ModuleLocator.parse(module)
-                VfsUtil.findFile(modulePath(locator), true)?.findChild(locator.path ?: "lib.star")
+                VfsUtil.findFile(modulePath(locator), false)?.findChild(locator.path ?: "lib.star")
             } catch (ex: IllegalStateException) {
                 null
             }
@@ -35,13 +34,13 @@ class CirrusModuleManager : IndexableSetContributor() {
             }
         }
 
-        private val globalCacheLocation: Path
+        internal val globalCacheLocation: Path
             get() = Paths.get(PathManager.getSystemPath(), "extStarlarkModules")
 
         fun modulePath(module: ModuleLocator): Path = globalCacheLocation.resolve(module.org).resolve(module.repo)
     }
 
     override fun getAdditionalRootsToIndex(): Set<VirtualFile> {
-        return setOfNotNull(CIRRUS_MODULE?.parent, VfsUtil.findFile(globalCacheLocation, true))
+        return setOfNotNull(CIRRUS_MODULE?.parent, VfsUtil.findFile(globalCacheLocation, false))
     }
 }
