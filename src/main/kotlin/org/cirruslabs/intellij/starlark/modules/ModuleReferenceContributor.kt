@@ -2,6 +2,8 @@ package org.cirruslabs.intellij.starlark.modules
 
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.*
+import com.intellij.psi.impl.SharedPsiElementImplUtil
+import com.intellij.psi.impl.source.resolve.reference.PsiReferenceUtil
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet
 import com.intellij.util.ProcessingContext
 import com.jetbrains.python.psi.PyArgumentList
@@ -23,6 +25,18 @@ class ModuleReferenceContributor : PsiReferenceContributor() {
               .toList().toTypedArray()
           }
           return PsiReference.EMPTY_ARRAY
+        }
+      }
+    )
+    registrar.registerReferenceProvider(
+      PlatformPatterns.psiElement().and(PlatformPatterns.instanceOf(PyStringLiteralExpression::class.java)),
+      object : PsiReferenceProvider() {
+        override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
+          if (element !is PyStringLiteralExpression) return PsiReference.EMPTY_ARRAY
+          val argumentList = element.parent as? PyArgumentList ?: return PsiReference.EMPTY_ARRAY
+          val moduleArgument = argumentList.arguments.firstOrNull() as? PyStringLiteralExpression
+          if (moduleArgument == null || moduleArgument == element) return PsiReference.EMPTY_ARRAY
+          return arrayOf(LoadedElementReference(moduleArgument.stringValue, element))
         }
       }
     )

@@ -1,5 +1,6 @@
 import org.jetbrains.intellij.tasks.PatchPluginXmlTask
 import org.jetbrains.intellij.tasks.PublishTask
+import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -33,3 +34,6 @@ patchPluginXml.setVersion(System.getenv().getOrDefault("CIRRUS_TAG", "1.0"))
 
 val publishPlugin: PublishTask by tasks
 publishPlugin.setToken(System.getenv().getOrDefault("JETBRAINS_TOKEN", ""))
+
+val runIde: RunIdeTask by tasks
+runIde.systemProperty("idea.is.internal", "true")
