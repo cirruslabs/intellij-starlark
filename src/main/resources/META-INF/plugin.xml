@@ -1,6 +1,6 @@
 <idea-plugin>
-  <id>com.intellij.plugins.starlark</id>
-  <name>Starlark Support</name>
+  <id>org.cirruslabs.intellij.plugins.starlark</id>
+  <name>Cirrus Starlark Support</name>
   <change-notes>
     <![CDATA[
     ]]>
