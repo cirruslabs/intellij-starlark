@@ -29,7 +29,8 @@ class CirrusModuleManager : IndexableSetContributor() {
         }
 
         fun resolveModuleFile(originalFile: PsiFile, module: String): PyFile? {
-            return findModule(module)?.let {
+            val moduleFile = findModule(module) ?: VfsUtil.findRelativeFile(originalFile.virtualFile.parent, module)
+            return moduleFile?.let {
                 PsiManager.getInstance(originalFile.project).findFile(it) as? PyFile
             }
         }
