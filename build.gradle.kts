@@ -23,8 +23,8 @@ repositories {
 }
 
 intellij {
-  version = "2021.1"
-  setPlugins("PythonCore:211.6693.119", "com.intellij.java")
+  version = "2021.1.1"
+  setPlugins("PythonCore:211.7142.45", "com.intellij.java")
   isDownloadSources = true
   pluginName = "Starlark"
 }

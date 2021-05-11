@@ -18,6 +18,10 @@ class CirrusModuleManager : IndexableSetContributor() {
             VfsUtil.findFileByURL(url)
         }
 
+        val CIRRUS_MODULE_HOME: VirtualFile? by lazy {
+            CIRRUS_MODULE?.parent
+        }
+
         fun findModule(module: String): VirtualFile? {
             if (module == "cirrus") return CIRRUS_MODULE
             return try {

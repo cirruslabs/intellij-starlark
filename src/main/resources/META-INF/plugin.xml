@@ -31,6 +31,10 @@
     <indexedRootsProvider implementation="org.cirruslabs.intellij.starlark.modules.CirrusModuleManager"/>
     <psi.referenceContributor implementation="org.cirruslabs.intellij.starlark.modules.ModuleReferenceContributor"/>
     <cachesInvalidator implementation="org.cirruslabs.intellij.starlark.modules.CirrusModulesCacheInvalidator"/>
+
+    <sdkType implementation="org.cirruslabs.intellij.starlark.sdk.StarlarkSdkType"/>
+    <facetType implementation="org.cirruslabs.intellij.starlark.facet.StarlarkFacetType"/>
+    <framework.detector implementation="org.cirruslabs.intellij.starlark.sdk.StarlarkDetector"/>
   </extensions>
 
   <extensions defaultExtensionNs="Pythonid">
