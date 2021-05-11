@@ -9,8 +9,6 @@ import com.intellij.facet.ui.FacetValidatorsManager
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleType
-import com.intellij.openapi.projectRoots.Sdk
-import com.jetbrains.python.PyBundle
 import com.jetbrains.python.facet.PythonFacetSettings
 import org.cirruslabs.intellij.starlark.sdk.StarlarkSdk
 import org.jdom.Element
@@ -43,7 +41,7 @@ class StarlarkFacetType : FacetType<StarlarkFacet, StarlarkFacetType.StarlarkFac
 
   class StarlarkFacetConfiguration : PythonFacetSettings(), FacetConfiguration {
     init {
-        sdk = StarlarkSdk
+      sdk = StarlarkSdk
     }
 
     override fun createEditorTabs(editorContext: FacetEditorContext, validatorsManager: FacetValidatorsManager): Array<FacetEditorTab> {

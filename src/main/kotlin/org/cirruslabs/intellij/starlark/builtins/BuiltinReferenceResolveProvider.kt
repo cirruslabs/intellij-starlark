@@ -8,7 +8,7 @@ import com.jetbrains.python.psi.resolve.RatedResolveResult
 import com.jetbrains.python.psi.types.TypeEvalContext
 import org.cirruslabs.intellij.starlark.StarlarkLanguage
 
-class BuiltinReferenceResolveProvider: PyReferenceResolveProvider {
+class BuiltinReferenceResolveProvider : PyReferenceResolveProvider {
   override fun resolveName(expression: PyQualifiedExpression, context: TypeEvalContext): List<RatedResolveResult> {
     if (expression.containingFile.language !is StarlarkLanguage) {
       return emptyList()

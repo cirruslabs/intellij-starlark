@@ -15,6 +15,7 @@ class StarlarkFacet(
   companion object {
     val ID = FacetTypeId<StarlarkFacet>("starlark")
   }
+
   override fun initFacet() {
   }
 }

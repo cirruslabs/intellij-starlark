@@ -39,11 +39,14 @@
 
   <extensions defaultExtensionNs="Pythonid">
     <!--  builtins  -->
-    <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.builtins.BuiltinReferenceResolveProvider"/>
+    <pyReferenceResolveProvider
+      implementation="org.cirruslabs.intellij.starlark.builtins.BuiltinReferenceResolveProvider"/>
     <!--  load  -->
-    <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.modules.LoadedReferenceResolveProvider"/>
+    <pyReferenceResolveProvider
+      implementation="org.cirruslabs.intellij.starlark.modules.LoadedReferenceResolveProvider"/>
     <inspectionExtension implementation="org.cirruslabs.intellij.starlark.inspections.StarlarkPyInspectionExtension"/>
-    <unresolvedReferenceQuickFixProvider implementation="org.cirruslabs.intellij.starlark.modules.UnresolvedModuleReferenceQuickFixProvider"/>
+    <unresolvedReferenceQuickFixProvider
+      implementation="org.cirruslabs.intellij.starlark.modules.UnresolvedModuleReferenceQuickFixProvider"/>
     <!--  hooks  -->
     <typeProvider implementation="org.cirruslabs.intellij.starlark.hooks.CirrusHooksTypeProvider"/>
   </extensions>
