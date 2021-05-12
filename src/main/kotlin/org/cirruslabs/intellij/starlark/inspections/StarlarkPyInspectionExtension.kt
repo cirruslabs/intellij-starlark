@@ -5,7 +5,7 @@ import com.jetbrains.python.psi.PyFile
 import org.cirruslabs.intellij.starlark.StarlarkLanguage
 
 class StarlarkPyInspectionExtension : PyInspectionExtension() {
-    override fun ignoreInterpreterWarnings(file: PyFile): Boolean {
-        return file.language is StarlarkLanguage
-    }
+  override fun ignoreInterpreterWarnings(file: PyFile): Boolean {
+    return file.language is StarlarkLanguage
+  }
 }

@@ -6,7 +6,7 @@ import com.intellij.psi.tree.IFileElementType
 import com.jetbrains.python.PythonParserDefinition
 import com.jetbrains.python.psi.impl.PyFileImpl
 
-class StarlarkParserDefinition: PythonParserDefinition() {
+class StarlarkParserDefinition : PythonParserDefinition() {
   companion object {
     val FILE = IFileElementType(StarlarkLanguage.INSTANCE)
   }

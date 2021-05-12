@@ -5,7 +5,10 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.util.ProcessingContext
 import com.jetbrains.python.codeInsight.completion.PyKeywordCompletionContributor
-import com.jetbrains.python.psi.*
+import com.jetbrains.python.psi.PyCallExpression
+import com.jetbrains.python.psi.PyExpressionStatement
+import com.jetbrains.python.psi.PyKeywordArgument
+import com.jetbrains.python.psi.PyStringLiteralExpression
 import org.cirruslabs.intellij.starlark.StarlarkLanguage
 
 

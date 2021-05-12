@@ -31,15 +31,22 @@
     <indexedRootsProvider implementation="org.cirruslabs.intellij.starlark.modules.CirrusModuleManager"/>
     <psi.referenceContributor implementation="org.cirruslabs.intellij.starlark.modules.ModuleReferenceContributor"/>
     <cachesInvalidator implementation="org.cirruslabs.intellij.starlark.modules.CirrusModulesCacheInvalidator"/>
+
+    <sdkType implementation="org.cirruslabs.intellij.starlark.sdk.StarlarkSdkType"/>
+    <facetType implementation="org.cirruslabs.intellij.starlark.facet.StarlarkFacetType"/>
+    <framework.detector implementation="org.cirruslabs.intellij.starlark.sdk.StarlarkDetector"/>
   </extensions>
 
   <extensions defaultExtensionNs="Pythonid">
     <!--  builtins  -->
-    <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.builtins.BuiltinReferenceResolveProvider"/>
+    <pyReferenceResolveProvider
+      implementation="org.cirruslabs.intellij.starlark.builtins.BuiltinReferenceResolveProvider"/>
     <!--  load  -->
-    <pyReferenceResolveProvider implementation="org.cirruslabs.intellij.starlark.modules.LoadedReferenceResolveProvider"/>
+    <pyReferenceResolveProvider
+      implementation="org.cirruslabs.intellij.starlark.modules.LoadedReferenceResolveProvider"/>
     <inspectionExtension implementation="org.cirruslabs.intellij.starlark.inspections.StarlarkPyInspectionExtension"/>
-    <unresolvedReferenceQuickFixProvider implementation="org.cirruslabs.intellij.starlark.modules.UnresolvedModuleReferenceQuickFixProvider"/>
+    <unresolvedReferenceQuickFixProvider
+      implementation="org.cirruslabs.intellij.starlark.modules.UnresolvedModuleReferenceQuickFixProvider"/>
     <!--  hooks  -->
     <typeProvider implementation="org.cirruslabs.intellij.starlark.hooks.CirrusHooksTypeProvider"/>
   </extensions>

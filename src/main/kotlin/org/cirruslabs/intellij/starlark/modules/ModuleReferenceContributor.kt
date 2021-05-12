@@ -2,8 +2,6 @@ package org.cirruslabs.intellij.starlark.modules
 
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.*
-import com.intellij.psi.impl.SharedPsiElementImplUtil
-import com.intellij.psi.impl.source.resolve.reference.PsiReferenceUtil
 import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet
 import com.intellij.util.ProcessingContext
 import com.jetbrains.python.psi.PyArgumentList

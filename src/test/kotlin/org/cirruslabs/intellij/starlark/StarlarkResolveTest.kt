@@ -1,9 +1,7 @@
 package org.cirruslabs.intellij.starlark
 
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
 
-
-class StarlarkResolveTest : LightJavaCodeInsightFixtureTestCase() {
+class StarlarkResolveTest : StarlarkCodeInsightFixtureTestCase() {
   override fun getTestDataPath(): String {
     return "src/test/testData/resolve"
   }

@@ -22,7 +22,6 @@ class BuiltinCompletionContributor : CompletionContributor() {
           }
           val psiManager = PsiManager.getInstance(element.project)
           listOfNotNull(
-            psiManager.findFile(BuitlinSetContributor.PYTHON_BUILTINS) as? PyFile,
             psiManager.findFile(BuitlinSetContributor.STARLARK_BUILTINS) as? PyFile,
           ).forEach { file ->
             file.topLevelClasses.forEach {

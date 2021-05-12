@@ -8,7 +8,7 @@ import com.jetbrains.python.psi.resolve.RatedResolveResult
 import com.jetbrains.python.psi.types.TypeEvalContext
 import org.cirruslabs.intellij.starlark.StarlarkLanguage
 
-class BuiltinReferenceResolveProvider: PyReferenceResolveProvider {
+class BuiltinReferenceResolveProvider : PyReferenceResolveProvider {
   override fun resolveName(expression: PyQualifiedExpression, context: TypeEvalContext): List<RatedResolveResult> {
     if (expression.containingFile.language !is StarlarkLanguage) {
       return emptyList()
@@ -16,16 +16,10 @@ class BuiltinReferenceResolveProvider: PyReferenceResolveProvider {
     val builtinsFile = PsiManager.getInstance(expression.project).findFile(
       BuitlinSetContributor.STARLARK_BUILTINS
     ) as? PyFile ?: return emptyList()
-    val builtinTypesFile = PsiManager.getInstance(expression.project).findFile(
-      BuitlinSetContributor.PYTHON_BUILTINS
-    ) as? PyFile ?: return emptyList()
     return listOfNotNull(
       builtinsFile.findExportedName(expression.name)?.let {
         RatedResolveResult(RatedResolveResult.RATE_NORMAL, it)
       },
-        builtinTypesFile.findExportedName(expression.name)?.let {
-        RatedResolveResult(RatedResolveResult.RATE_NORMAL, it)
-      }
     )
   }
 }
