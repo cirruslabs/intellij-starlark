@@ -9,6 +9,8 @@ import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task.Backgroundable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.io.FileUtil
+import com.intellij.openapi.vfs.VfsUtilCore
+import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.platform.templates.github.DownloadUtil
 import com.intellij.platform.templates.github.ZipUtil
 import org.cirruslabs.intellij.starlark.StarlarkBundle
@@ -27,17 +29,21 @@ class DownloadGitHubModuleQuickFix(val module: ModuleLocator) : LocalQuickFix {
     val containingFile = descriptor.psiElement.containingFile
     ProgressManager.getInstance().run(object : Backgroundable(project, StarlarkBundle.getMessage("starlark.intention.fetch.progress.fetching.module")) {
       override fun run(indicator: ProgressIndicator) {
-        val moduleURL = "https://github.com/${module.org}/${module.repo}/archive/${module.revision ?: "master"}.zip"
+        val moduleURL = "https://github.com/${module.org}/${module.repo}/archive/${module.revision ?: "main"}.zip"
+        val modulePath = CirrusModuleManager.modulePath(module)
+
         val tmpFile = File.createTempFile("download", "module")
         tmpFile.deleteOnExit()
         try {
-          val modulePath = CirrusModuleManager.modulePath(module)
           DownloadUtil.downloadAtomically(indicator, moduleURL, tmpFile)
           FileUtil.delete(modulePath)
           ZipUtil.unzip(indicator, modulePath, ZipInputStream(BufferedInputStream(FileInputStream(tmpFile))), null, null, true)
         } finally {
           tmpFile.delete()
         }
+
+        // refresh VFS so the files are picked up before requesting a code analyzer to restart
+        VirtualFileManager.getInstance().refreshAndFindFileByNioPath(modulePath.resolve(module.path ?: "lib.star"))
         ApplicationManager.getApplication().invokeLater {
           DaemonCodeAnalyzer.getInstance(project).restart(containingFile)
         }
