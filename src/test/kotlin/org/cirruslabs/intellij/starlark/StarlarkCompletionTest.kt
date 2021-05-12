@@ -19,6 +19,10 @@ class StarlarkCompletionTest : StarlarkCodeInsightFixtureTestCase() {
     assertExpectedLookups("builtin.star", "print", "load")
   }
 
+  fun testBuiltinList() {
+    assertExpectedLookups("builtin_list.star", "sort", "append")
+  }
+
   fun testLoadCirrusFS() {
     assertExpectedLookups("load_cirrus_fs.star", "exists")
   }
