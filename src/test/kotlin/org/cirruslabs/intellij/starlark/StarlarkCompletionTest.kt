@@ -1,10 +1,9 @@
 package org.cirruslabs.intellij.starlark
 
 import com.intellij.codeInsight.completion.CompletionType
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
 
 
-class StarlarkCompletionTest : LightJavaCodeInsightFixtureTestCase() {
+class StarlarkCompletionTest : StarlarkCodeInsightFixtureTestCase() {
   override fun getTestDataPath(): String {
     return "src/test/testData/completion"
   }
