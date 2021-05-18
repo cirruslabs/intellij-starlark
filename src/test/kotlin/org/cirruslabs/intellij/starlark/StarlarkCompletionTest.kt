@@ -16,7 +16,7 @@ class StarlarkCompletionTest : StarlarkCodeInsightFixtureTestCase() {
   }
 
   fun testBuiltin() {
-    assertExpectedLookups("builtin.star", "print", "load")
+    assertExpectedLookups("builtin.star", "print", "load", "fail")
   }
 
   fun testBuiltinList() {
