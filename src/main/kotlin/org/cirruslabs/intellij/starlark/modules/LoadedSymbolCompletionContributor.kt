@@ -4,7 +4,7 @@ import com.intellij.codeInsight.completion.*
 import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.util.ProcessingContext
-import com.jetbrains.python.codeInsight.completion.PyKeywordCompletionContributor
+import com.jetbrains.python.PyTokenTypes
 import com.jetbrains.python.psi.PyCallExpression
 import com.jetbrains.python.psi.PyExpressionStatement
 import com.jetbrains.python.psi.PyKeywordArgument
@@ -14,7 +14,7 @@ import org.cirruslabs.intellij.starlark.StarlarkLanguage
 
 class LoadedSymbolCompletionContributor : CompletionContributor() {
   init {
-    extend(CompletionType.BASIC, PlatformPatterns.psiElement().and(PyKeywordCompletionContributor.FIRST_ON_LINE),
+    extend(CompletionType.BASIC, PlatformPatterns.psiElement().withElementType(PyTokenTypes.IDENTIFIER),
       object : CompletionProvider<CompletionParameters>() {
         override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext, result: CompletionResultSet) {
           val element = parameters.position

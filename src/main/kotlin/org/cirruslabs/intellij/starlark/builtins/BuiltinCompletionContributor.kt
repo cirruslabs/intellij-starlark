@@ -5,15 +5,14 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiManager
 import com.intellij.util.ProcessingContext
-import com.jetbrains.python.codeInsight.completion.PyKeywordCompletionContributor
+import com.jetbrains.python.PyTokenTypes
 import com.jetbrains.python.psi.PyFile
 import org.cirruslabs.intellij.starlark.StarlarkLanguage
 
 
 class BuiltinCompletionContributor : CompletionContributor() {
   init {
-    val starlarkElement = PlatformPatterns.psiElement()
-    extend(CompletionType.BASIC, starlarkElement.and(PyKeywordCompletionContributor.FIRST_ON_LINE),
+    extend(CompletionType.BASIC, PlatformPatterns.psiElement().withElementType(PyTokenTypes.IDENTIFIER),
       object : CompletionProvider<CompletionParameters>() {
         override fun addCompletions(parameters: CompletionParameters, context: ProcessingContext, result: CompletionResultSet) {
           val element = parameters.position
