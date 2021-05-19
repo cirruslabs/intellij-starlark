@@ -32,6 +32,9 @@ class ModuleReferenceContributor : PsiReferenceContributor() {
         override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
           if (element !is PyStringLiteralExpression) return PsiReference.EMPTY_ARRAY
           val argumentList = element.parent as? PyArgumentList ?: return PsiReference.EMPTY_ARRAY
+          if (argumentList.callExpression?.callee?.name != "load") {
+            return PsiReference.EMPTY_ARRAY
+          }
           val moduleArgument = argumentList.arguments.firstOrNull() as? PyStringLiteralExpression
           if (moduleArgument == null || moduleArgument == element) return PsiReference.EMPTY_ARRAY
           return arrayOf(LoadedElementReference(moduleArgument.stringValue, element))
