@@ -6,8 +6,8 @@ class StarlarkResolveTest : StarlarkCodeInsightFixtureTestCase() {
     return "src/test/testData/resolve"
   }
 
-  private fun assertReferenceResolves(filePath: String) {
-    myFixture.configureByFiles(filePath)
+  private fun assertReferenceResolves(vararg filePaths: String) {
+    myFixture.configureByFiles(*filePaths)
     val reference = myFixture.file.findReferenceAt(myFixture.caretOffset)
     assertNotNull("No reference for element '${myFixture.file.findElementAt(myFixture.caretOffset)?.text}'", reference)
     val resolvedElement = reference?.resolve()
@@ -24,5 +24,9 @@ class StarlarkResolveTest : StarlarkCodeInsightFixtureTestCase() {
 
   fun testLoadCirrusJson() {
     assertReferenceResolves("load_cirrus_json.star")
+  }
+
+  fun testLoadLocalFile() {
+    assertReferenceResolves("load_cirrus_json.star", "foo/foo.star")
   }
 }
