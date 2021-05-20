@@ -30,7 +30,7 @@ intellij {
 }
 
 val patchPluginXml: PatchPluginXmlTask by tasks
-patchPluginXml.setVersion(System.getenv().getOrDefault("CIRRUS_TAG", "1.0"))
+patchPluginXml.setVersion(System.getenv().getOrDefault("CIRRUS_TAG", "2.0-SNAPSHOT"))
 
 val publishPlugin: PublishTask by tasks
 publishPlugin.setToken(System.getenv().getOrDefault("JETBRAINS_TOKEN", ""))
