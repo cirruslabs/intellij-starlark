@@ -47,11 +47,5 @@ class StarlarkFacetType : FacetType<StarlarkFacet, StarlarkFacetType.StarlarkFac
     override fun createEditorTabs(editorContext: FacetEditorContext, validatorsManager: FacetValidatorsManager): Array<FacetEditorTab> {
       return arrayOf()
     }
-
-    override fun readExternal(element: Element) {
-    }
-
-    override fun writeExternal(element: Element) {
-    }
   }
 }
