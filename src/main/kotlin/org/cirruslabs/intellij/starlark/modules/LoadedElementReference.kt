@@ -2,6 +2,7 @@ package org.cirruslabs.intellij.starlark.modules
 
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.PsiReference
 import com.jetbrains.python.psi.PyStringLiteralExpression
 
@@ -30,7 +31,7 @@ class LoadedElementReference(
 
   override fun getVariants(): Array<Any> {
     val moduleFile = CirrusModuleManager.resolveModuleFile(element.containingFile, module) ?: return emptyArray()
-    return (moduleFile.topLevelAttributes.toList<PsiElement>() + moduleFile.topLevelFunctions.toList<PsiElement>())
-      .toTypedArray()
+    return (moduleFile.topLevelAttributes.toList<PsiNamedElement>() + moduleFile.topLevelFunctions.toList<PsiNamedElement>())
+      .filter { it.name?.startsWith('_') == false }.toTypedArray()
   }
 }
