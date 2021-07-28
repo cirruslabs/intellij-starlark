@@ -5,5 +5,5 @@ import com.intellij.testFramework.LightProjectDescriptor
 import org.cirruslabs.intellij.starlark.sdk.StarlarkSdk
 
 object StarlarkTestProjectDescriptor : LightProjectDescriptor() {
-  override fun getSdk(): Sdk = StarlarkSdk
+  override fun getSdk(): Sdk = StarlarkSdk()
 }

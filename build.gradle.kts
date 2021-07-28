@@ -4,7 +4,7 @@ import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.4.32"
+  kotlin("jvm") version "1.5.20"
   id("org.jetbrains.intellij") version "0.7.2"
 }
 
@@ -23,8 +23,8 @@ repositories {
 }
 
 intellij {
-  version = "2021.1.1"
-  setPlugins("PythonCore:211.7142.45", "com.intellij.java")
+  version = "2021.2"
+  setPlugins("PythonCore:212.4746.96", "com.intellij.java")
   isDownloadSources = true
   pluginName = "Starlark"
 }

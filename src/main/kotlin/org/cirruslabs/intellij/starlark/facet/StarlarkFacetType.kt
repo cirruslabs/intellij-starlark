@@ -11,10 +11,11 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleType
 import com.jetbrains.python.facet.PythonFacetSettings
 import org.cirruslabs.intellij.starlark.sdk.StarlarkSdk
-import org.jdom.Element
 import javax.swing.Icon
 
-class StarlarkFacetType : FacetType<StarlarkFacet, StarlarkFacetType.StarlarkFacetConfiguration>(StarlarkFacet.ID, ID, "Starlark") {
+class StarlarkFacetType : FacetType<StarlarkFacet, StarlarkFacetType.StarlarkFacetConfiguration>(
+  StarlarkFacet.ID, ID, "Starlark"
+) {
   companion object {
     private val ID = "Starlark"
 
@@ -26,10 +27,12 @@ class StarlarkFacetType : FacetType<StarlarkFacet, StarlarkFacetType.StarlarkFac
     return StarlarkFacetConfiguration()
   }
 
-  override fun createFacet(module: Module,
-                           name: String,
-                           configuration: StarlarkFacetConfiguration,
-                           underlyingFacet: Facet<*>?): StarlarkFacet {
+  override fun createFacet(
+    module: Module,
+    name: String,
+    configuration: StarlarkFacetConfiguration,
+    underlyingFacet: Facet<*>?
+  ): StarlarkFacet {
     return StarlarkFacet(this, module, name, configuration, underlyingFacet)
   }
 
@@ -41,10 +44,13 @@ class StarlarkFacetType : FacetType<StarlarkFacet, StarlarkFacetType.StarlarkFac
 
   class StarlarkFacetConfiguration : PythonFacetSettings(), FacetConfiguration {
     init {
-      sdk = StarlarkSdk
+      sdk = StarlarkSdk()
     }
 
-    override fun createEditorTabs(editorContext: FacetEditorContext, validatorsManager: FacetValidatorsManager): Array<FacetEditorTab> {
+    override fun createEditorTabs(
+      editorContext: FacetEditorContext,
+      validatorsManager: FacetValidatorsManager
+    ): Array<FacetEditorTab> {
       return arrayOf()
     }
   }
