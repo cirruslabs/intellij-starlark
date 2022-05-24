@@ -1,17 +1,15 @@
-import org.jetbrains.intellij.tasks.PatchPluginXmlTask
-import org.jetbrains.intellij.tasks.PublishTask
-import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.5.20"
-  id("org.jetbrains.intellij") version "0.7.2"
+  kotlin("jvm") version "1.6.21"
+  id("org.jetbrains.intellij") version "1.6.0"
 }
 
 tasks.withType<JavaCompile> {
   sourceCompatibility = "1.8"
   targetCompatibility = "1.8"
 }
+
 listOf("compileKotlin", "compileTestKotlin").forEach {
   tasks.getByName<KotlinCompile>(it) {
     kotlinOptions.jvmTarget = "1.8"
@@ -23,17 +21,19 @@ repositories {
 }
 
 intellij {
-  version = "2021.2"
-  setPlugins("PythonCore:212.4746.96", "com.intellij.java")
-  isDownloadSources = true
-  pluginName = "Starlark"
+  pluginName.set("Starlark")
+  version.set("2022.1.1")
+  plugins.set(listOf("PythonCore:221.5591.52", "com.intellij.java"))
+  downloadSources.set(true)
+  updateSinceUntilBuild.set(false) // let's leave until open ended
 }
 
-val patchPluginXml: PatchPluginXmlTask by tasks
-patchPluginXml.setVersion(System.getenv().getOrDefault("CIRRUS_TAG", "2.0-SNAPSHOT"))
+tasks {
+  patchPluginXml {
+    version.set(System.getenv().getOrDefault("CIRRUS_TAG", "2.0-SNAPSHOT"))
+  }
 
-val publishPlugin: PublishTask by tasks
-publishPlugin.setToken(System.getenv().getOrDefault("JETBRAINS_TOKEN", ""))
-
-val runIde: RunIdeTask by tasks
-runIde.systemProperty("idea.is.internal", "true")
+  publishPlugin {
+    token.set(System.getenv("JETBRAINS_TOKEN"))
+  }
+}

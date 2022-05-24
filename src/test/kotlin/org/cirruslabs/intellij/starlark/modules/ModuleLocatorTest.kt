@@ -1,8 +1,7 @@
 package org.cirruslabs.intellij.starlark.modules
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.test.assertEquals
-
 
 class ModuleLocatorTest {
   @Test

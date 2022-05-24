@@ -4,7 +4,7 @@
   <description>Code assistance for Cirrus specific Starlark configuration scripts and hooks</description>
   <vendor>@fedor</vendor>
 
-  <idea-version since-build="203.*"/><!-- Will be patched by the plugin -->
+  <idea-version since-build="221.*"/>
 
   <resource-bundle>StarlarkBundle</resource-bundle>
 
