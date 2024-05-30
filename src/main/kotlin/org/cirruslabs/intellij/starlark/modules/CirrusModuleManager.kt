@@ -43,7 +43,10 @@ class CirrusModuleManager : IndexableSetContributor() {
     internal val globalCacheLocation: Path
       get() = Paths.get(PathManager.getSystemPath(), "extStarlarkModules")
 
-    fun modulePath(module: ModuleLocator): Path = globalCacheLocation.resolve(module.org).resolve(module.repo)
+    fun modulePath(module: ModuleLocator): Path =
+      globalCacheLocation.resolve(module.org)
+        .resolve(module.repo)
+        .resolve(module.revision ?: "main")
   }
 
   override fun getAdditionalRootsToIndex(): Set<VirtualFile> {

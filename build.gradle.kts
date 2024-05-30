@@ -23,7 +23,7 @@ repositories {
 intellij {
   pluginName.set("Starlark")
   version.set("2022.1.1")
-  plugins.set(listOf("PythonCore:221.5591.52", "com.intellij.java"))
+  plugins.set(listOf("PythonCore:221.5591.52", "com.intellij.java", "Git4Idea"))
   downloadSources.set(true)
   updateSinceUntilBuild.set(false) // let's leave until open ended
 }

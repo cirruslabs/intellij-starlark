@@ -8,18 +8,16 @@ import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task.Backgroundable
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.util.io.FileUtil
-import com.intellij.openapi.vfs.VfsUtilCore
+import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFileManager
-import com.intellij.platform.templates.github.DownloadUtil
-import com.intellij.platform.templates.github.ZipUtil
+import git4idea.checkout.GitCheckoutProvider
+import git4idea.commands.Git
+import git4idea.commands.GitCommand
+import git4idea.commands.GitLineHandler
 import org.cirruslabs.intellij.starlark.StarlarkBundle
-import java.io.BufferedInputStream
-import java.io.File
-import java.io.FileInputStream
-import java.util.zip.ZipInputStream
+import kotlin.io.path.name
 
-class DownloadGitHubModuleQuickFix(val module: ModuleLocator) : LocalQuickFix {
+class DownloadGitHubModuleQuickFix(private val module: ModuleLocator) : LocalQuickFix {
   constructor(module: String) : this(ModuleLocator.parse(module))
 
   override fun getFamilyName(): String =
@@ -27,21 +25,37 @@ class DownloadGitHubModuleQuickFix(val module: ModuleLocator) : LocalQuickFix {
 
   override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
     val containingFile = descriptor.psiElement.containingFile
+
     ProgressManager.getInstance().run(object : Backgroundable(project, StarlarkBundle.getMessage("starlark.intention.fetch.progress.fetching.module")) {
       override fun run(indicator: ProgressIndicator) {
-        val moduleURL = "https://github.com/${module.org}/${module.repo}/archive/${module.revision ?: "main"}.zip"
         val modulePath = CirrusModuleManager.modulePath(module)
+        val git = Git.getInstance()
 
-        val tmpFile = File.createTempFile("download", "module")
-        tmpFile.deleteOnExit()
-        try {
-          DownloadUtil.downloadAtomically(indicator, moduleURL, tmpFile)
-          FileUtil.delete(modulePath)
-          ZipUtil.unzip(indicator, modulePath, ZipInputStream(BufferedInputStream(FileInputStream(tmpFile))), null, null, true)
-        } finally {
-          tmpFile.delete()
+        val moduleParentDir = VfsUtil.createDirectories(modulePath.parent.toString())
+        moduleParentDir.findChild(modulePath.name)?.also {
+          ApplicationManager.getApplication().runWriteAction { it.delete(this@DownloadGitHubModuleQuickFix) }
         }
 
+        val success = GitCheckoutProvider.doClone(
+          project,
+          git,
+          modulePath.name, modulePath.parent.toString(),
+          "git@github.com:${module.org}/${module.repo}.git"
+        )
+        if (!success) {
+          return
+        }
+
+        val moduleDir = VirtualFileManager.getInstance().refreshAndFindFileByNioPath(modulePath) ?: return
+
+        if (module.revision != null && module.revision != "main") {
+          val handler = GitLineHandler(project, moduleDir, GitCommand.CHECKOUT)
+          handler.setSilent(false)
+          handler.setStdoutSuppressed(false)
+          handler.addParameters("-b", module.revision ?: "main")
+          handler.endOptions()
+          git.runCommand(handler).throwOnError()
+        }
         // refresh VFS so the files are picked up before requesting a code analyzer to restart
         VirtualFileManager.getInstance().refreshAndFindFileByNioPath(modulePath.resolve(module.path ?: "lib.star"))
         ApplicationManager.getApplication().invokeLater {

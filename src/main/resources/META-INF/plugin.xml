@@ -4,13 +4,14 @@
   <description>Code assistance for Cirrus specific Starlark configuration scripts and hooks</description>
   <vendor>@fedor</vendor>
 
-  <idea-version since-build="221.*"/>
+  <idea-version since-build="221"/>
 
   <resource-bundle>StarlarkBundle</resource-bundle>
 
   <depends>com.intellij.modules.platform</depends>
   <depends>com.intellij.modules.lang</depends>
   <depends>com.intellij.modules.python</depends>
+  <depends>Git4Idea</depends>
 
   <extensions defaultExtensionNs="com.intellij">
     <fileType name="Starlark" extensions="star" language="Starlark"

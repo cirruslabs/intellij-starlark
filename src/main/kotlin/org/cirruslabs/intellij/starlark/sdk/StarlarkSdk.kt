@@ -1,10 +1,8 @@
 package org.cirruslabs.intellij.starlark.sdk
 
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.application.runWriteAction
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl
 import com.intellij.openapi.roots.OrderRootType
-import com.intellij.openapi.vfs.VirtualFile
 import org.cirruslabs.intellij.starlark.StarlarkBundle
 import org.cirruslabs.intellij.starlark.modules.CirrusModuleManager
 
