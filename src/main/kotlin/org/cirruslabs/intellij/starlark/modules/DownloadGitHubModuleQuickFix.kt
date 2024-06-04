@@ -4,6 +4,7 @@ import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
 import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task.Backgroundable
@@ -25,17 +26,17 @@ class DownloadGitHubModuleQuickFix(private val module: ModuleLocator) : LocalQui
 
   override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
     val containingFile = descriptor.psiElement.containingFile
+    val modulePath = CirrusModuleManager.modulePath(module)
+    val moduleParentDir = VfsUtil.createDirectories(modulePath.parent.toString())
+    try {
+      moduleParentDir.findChild(modulePath.name)?.delete(this)
+    } catch (e: Throwable) {
+      thisLogger().warn(e)
+    }
 
     ProgressManager.getInstance().run(object : Backgroundable(project, StarlarkBundle.getMessage("starlark.intention.fetch.progress.fetching.module")) {
       override fun run(indicator: ProgressIndicator) {
-        val modulePath = CirrusModuleManager.modulePath(module)
         val git = Git.getInstance()
-
-        val moduleParentDir = VfsUtil.createDirectories(modulePath.parent.toString())
-        moduleParentDir.findChild(modulePath.name)?.also {
-          ApplicationManager.getApplication().runWriteAction { it.delete(this@DownloadGitHubModuleQuickFix) }
-        }
-
         val success = GitCheckoutProvider.doClone(
           project,
           git,

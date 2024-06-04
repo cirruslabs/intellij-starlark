@@ -41,7 +41,7 @@ class CirrusModuleManager : IndexableSetContributor() {
     }
 
     internal val globalCacheLocation: Path
-      get() = Paths.get(PathManager.getSystemPath(), "extStarlarkModules")
+      get() = Paths.get(PathManager.getSystemPath(), "externalStarlarkModules")
 
     fun modulePath(module: ModuleLocator): Path =
       globalCacheLocation.resolve(module.org)
