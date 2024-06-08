@@ -53,7 +53,7 @@ class DownloadGitHubModuleQuickFix(private val module: ModuleLocator) : LocalQui
           val handler = GitLineHandler(project, moduleDir, GitCommand.CHECKOUT)
           handler.setSilent(false)
           handler.setStdoutSuppressed(false)
-          handler.addParameters("-b", module.revision ?: "main")
+          handler.addParameters(module.revision)
           handler.endOptions()
           git.runCommand(handler).throwOnError()
         }

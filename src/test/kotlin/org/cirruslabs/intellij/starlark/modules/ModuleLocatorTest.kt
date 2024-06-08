@@ -18,5 +18,9 @@ class ModuleLocatorTest {
       ModuleLocator("some-org", "some-repo", "lib.star", "dev"),
       ModuleLocator.parse("github.com/some-org/some-repo/lib.star@dev")
     )
+    assertEquals(
+      ModuleLocator("some-org", "some-repo", "cloud/env.star", "analysis/master"),
+      ModuleLocator.parse("github.com/some-org/some-repo/cloud/env.star@analysis/master")
+    )
   }
 }
