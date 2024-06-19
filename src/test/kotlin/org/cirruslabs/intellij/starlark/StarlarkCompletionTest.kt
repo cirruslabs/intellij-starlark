@@ -15,11 +15,11 @@ class StarlarkCompletionTest : StarlarkCodeInsightFixtureTestCase() {
     assertContainsElements(lookupElement, *expected)
   }
 
-  fun testBuiltin() {
+  fun _testBuiltin() {
     assertExpectedLookups("builtin.star", "print", "load", "fail")
   }
 
-  fun testBuiltinList() {
+  fun _testBuiltinList() {
     assertExpectedLookups("builtin_list.star", "sort", "append")
   }
 

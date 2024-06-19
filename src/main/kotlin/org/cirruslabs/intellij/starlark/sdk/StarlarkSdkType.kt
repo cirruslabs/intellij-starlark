@@ -1,5 +1,6 @@
 package org.cirruslabs.intellij.starlark.sdk
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.projectRoots.*
 import com.intellij.openapi.roots.OrderRootType
 import com.jetbrains.python.sdk.PythonSdkType
@@ -31,4 +32,13 @@ class StarlarkSdkType : SdkType("Starlark") {
     sdkModel: SdkModel,
     sdkModificator: SdkModificator
   ): AdditionalDataConfigurable? = null
+
+  override fun setupSdkPaths(sdk: Sdk) {
+    val modificator = sdk.sdkModificator
+    CirrusModuleManager.CIRRUS_MODULE_HOME?.let {
+      modificator.addRoot(it, OrderRootType.CLASSES)
+      modificator.addRoot(it, OrderRootType.SOURCES)
+    }
+    modificator.commitChanges()
+  }
 }

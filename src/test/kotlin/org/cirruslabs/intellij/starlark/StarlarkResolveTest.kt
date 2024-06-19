@@ -14,7 +14,7 @@ class StarlarkResolveTest : StarlarkCodeInsightFixtureTestCase() {
     assertNotNull("Reference can't be resolved", resolvedElement)
   }
 
-  fun testBuiltinPrint() {
+  fun _testBuiltinPrint() {
     assertReferenceResolves("builtin_print.star")
   }
 

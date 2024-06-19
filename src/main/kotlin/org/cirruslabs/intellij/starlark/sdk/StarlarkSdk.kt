@@ -11,13 +11,4 @@ class StarlarkSdk : ProjectJdkImpl(
   StarlarkSdkType.getInstance(),
   CirrusModuleManager.CIRRUS_MODULE_HOME?.path,
   "latest"
-) {
-  init {
-    val modificator = sdkModificator
-    CirrusModuleManager.CIRRUS_MODULE_HOME?.let {
-      modificator.addRoot(it, OrderRootType.CLASSES)
-      modificator.addRoot(it, OrderRootType.SOURCES)
-    }
-    ApplicationManager.getApplication().runWriteAction { modificator.commitChanges() }
-  }
-}
+)
