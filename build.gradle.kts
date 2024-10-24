@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.6.21"
-  id("org.jetbrains.intellij") version "1.17.3"
+  kotlin("jvm") version "1.9.22"
+  id("org.jetbrains.intellij") version "1.17.4"
 }
 
 tasks.withType<JavaCompile> {
@@ -22,8 +22,8 @@ repositories {
 
 intellij {
   pluginName.set("Starlark")
-  version.set("2022.1.1")
-  plugins.set(listOf("PythonCore:221.5591.52", "com.intellij.java", "Git4Idea"))
+  version.set("2024.1.7")
+  plugins.set(listOf("PythonCore:241.18034.55", "com.intellij.java", "Git4Idea"))
   downloadSources.set(true)
   updateSinceUntilBuild.set(false) // let's leave until open ended
 }

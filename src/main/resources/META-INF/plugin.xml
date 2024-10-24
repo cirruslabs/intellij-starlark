@@ -4,7 +4,7 @@
   <description>Code assistance for Cirrus specific Starlark configuration scripts and hooks</description>
   <vendor>@fedor</vendor>
 
-  <idea-version since-build="221"/>
+  <idea-version since-build="241"/>
 
   <resource-bundle>StarlarkBundle</resource-bundle>
 
@@ -29,7 +29,7 @@
                             implementationClass="org.cirruslabs.intellij.starlark.modules.LoadedSymbolCompletionContributor"/>
 
     <!--  cirrus module  -->
-    <indexedRootsProvider implementation="org.cirruslabs.intellij.starlark.modules.CirrusModuleManager"/>
+    <additionalLibraryRootsProvider implementation="org.cirruslabs.intellij.starlark.modules.CirrusModuleManager"/>
     <psi.referenceContributor implementation="org.cirruslabs.intellij.starlark.modules.ModuleReferenceContributor"/>
     <cachesInvalidator implementation="org.cirruslabs.intellij.starlark.modules.CirrusModulesCacheInvalidator"/>
 
