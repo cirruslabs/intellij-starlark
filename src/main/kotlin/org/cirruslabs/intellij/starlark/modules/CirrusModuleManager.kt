@@ -32,7 +32,7 @@ class CirrusModuleManager : AdditionalLibraryRootsProvider() {
       if (module == "cirrus") return CIRRUS_MODULE
       return try {
         val locator = ModuleLocator.parse(module)
-        VfsUtil.findFile(modulePath(locator), false)?.findChild(locator.path ?: "lib.star")
+        VfsUtil.findFile(modulePath(locator), false)?.findFileByRelativePath(locator.path ?: "lib.star")
       } catch (ex: IllegalStateException) {
         null
       }
